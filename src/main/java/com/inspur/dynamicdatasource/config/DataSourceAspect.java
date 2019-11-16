@@ -30,8 +30,8 @@ public class DataSourceAspect {
         DynamicDataSource.clearCurrentDataSourceKey();
     }
 
-
+    //TODO 从session中获取租客id
     private String getTenantIdFromSession() {
-        return "002";
+        return "2";
     }
 }

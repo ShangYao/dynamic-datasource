@@ -1,5 +1,6 @@
 package com.inspur.dynamicdatasource.config;
 
+import com.inspur.dynamicdatasource.entity.DatabaseDetail;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -29,14 +30,11 @@ public class DynamicDataSourceConfig {
         return new DynamicDataSource(defaultDataSource);
     }
 
-    public static DataSource createDataSourceByTenantId(String tenantId, String password, String username) {
-        return DataSourceBuilder.create().url(getDBUrl(tenantId))
-                .driverClassName(DRIVER_CLASS_NAME)
-                .username(username)
-                .password(password).build();
+    public static DataSource createDataSourceByTenantId(DatabaseDetail dbDetail) {
+        return DataSourceBuilder.create().url(dbDetail.getUrl())
+                .driverClassName(dbDetail.getDriverClassName())
+                .username(dbDetail.getUsername())
+                .password(dbDetail.getPassword()).build();
     }
 
-    private static String getDBUrl(String tenantId) {
-        return DEFAULT_DB_URL.replace("001", tenantId);
-    }
 }

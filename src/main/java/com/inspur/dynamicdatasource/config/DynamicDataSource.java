@@ -1,11 +1,13 @@
 package com.inspur.dynamicdatasource.config;
 
+import com.inspur.dynamicdatasource.entity.DatabaseDetail;
+import com.inspur.dynamicdatasource.mapper.DatabaseDetailMapper;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DynamicDataSource extends AbstractRoutingDataSource {
+public class DynamicDataSource<databaseDetailMapper> extends AbstractRoutingDataSource {
 
     /**
      * 缓存当前线程数据源的key（租户id）
@@ -16,6 +18,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      * ConcurrentHashMap<租户id，数据源>
      */
     private ConcurrentHashMap<Object, Object> targetDataSources = new ConcurrentHashMap<Object, Object>();
+
+    private DatabaseDetailMapper databaseDetailMapper = null;
 
     public DynamicDataSource(DataSource defaultTargetDataSource) {
         super.setDefaultTargetDataSource(defaultTargetDataSource);
@@ -60,9 +64,32 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.afterPropertiesSet();
     }
 
+
     private DataSource createDataSource(String dataSourceKey) {
-        return DynamicDataSourceConfig.createDataSourceByTenantId(dataSourceKey
-                , "12345678", "root");
+        DatabaseDetail dbDetail = getDatabaseDetail(dataSourceKey);
+        return DynamicDataSourceConfig.createDataSourceByTenantId(dbDetail);
+    }
+
+    //TODO 数据库信息动态获取
+    private DatabaseDetail getDatabaseDetail(String dataSourceKey) {
+        if (null == databaseDetailMapper) {
+            getDatabaseDetailMapper();
+        }
+        DatabaseDetail dbDetail = databaseDetailMapper.selectOneByTenantId(dataSourceKey);
+//        DatabaseDetail dbDetail = new DatabaseDetail();
+////        dbDetail.setDriverClassName("com.mysql.cj.jdbc.Driver");
+////        dbDetail.setPassword("12345678");
+////        dbDetail.setTenantId(dataSourceKey);
+////        dbDetail.setUrl("jdbc:mysql://192.168.139.128:3306/tenant002?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false");
+////        dbDetail.setUsername("root");
+        System.out.println(dbDetail.toString());
+        return dbDetail;
+    }
+
+    private synchronized void getDatabaseDetailMapper() {
+        if (null == databaseDetailMapper) {
+            databaseDetailMapper = SpringContextHolder.getBean(DatabaseDetailMapper.class);
+        }
     }
 
 
