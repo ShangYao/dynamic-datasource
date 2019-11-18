@@ -14,7 +14,7 @@ public class SpringContextHolder implements ApplicationContextAware {
         APP_CONTEXT = applicationContext;
     }
 
-    public static <T> T getBean(Class<T> requiredType) {
+    static <T> T getBean(Class<T> requiredType) {
         return APP_CONTEXT.getBean(requiredType);
     }
 }

@@ -29,7 +29,7 @@ public class DynamicDataSourceConfig {
         return new DynamicDataSource(defaultDataSource);
     }
 
-    public static DataSource createDataSourceByTenantId(DatabaseDetail dbDetail) {
+    static DataSource createDataSourceByTenantId(DatabaseDetail dbDetail) {
         return DataSourceBuilder.create().url(dbDetail.getUrl())
                 .driverClassName(dbDetail.getDriverClassName())
                 .username(dbDetail.getUsername())

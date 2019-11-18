@@ -1,6 +1,5 @@
 package com.inspur.dynamicdatasource.service;
 
-import com.inspur.dynamicdatasource.config.annotation.DynamicSwitchDataSource;
 import com.inspur.dynamicdatasource.entity.User;
 import com.inspur.dynamicdatasource.mapper.UserMapper;
 import org.springframework.stereotype.Service;

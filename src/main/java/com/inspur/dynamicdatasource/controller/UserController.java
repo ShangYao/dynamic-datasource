@@ -1,6 +1,5 @@
 package com.inspur.dynamicdatasource.controller;
 
-import com.inspur.dynamicdatasource.config.annotation.DynamicSwitchDataSource;
 import com.inspur.dynamicdatasource.entity.User;
 import com.inspur.dynamicdatasource.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+
     @Autowired
     private UserService userService;
 
