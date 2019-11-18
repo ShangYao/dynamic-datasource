@@ -10,10 +10,10 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DynamicDataSourceConfig {
-    private static final String DEFAULT_DB_URL = "jdbc:mysql://192.168.139.128:3306/tenant001?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false";
+    private static final String DEFAULT_DB_URL = "jdbc:mysql://localhost:3306/tenant001?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=UTC";
     private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String DEFAULT_USER_NAME = "root";
-    private static final String DEFAULT_PASSWORD = "12345678";
+    private static final String DEFAULT_PASSWORD = "root";
 
     @Bean("defaultDataSource")
     public DataSource defaultDataSource() {
