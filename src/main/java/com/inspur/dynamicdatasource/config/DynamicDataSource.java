@@ -82,7 +82,6 @@ public class DynamicDataSource<databaseDetailMapper> extends AbstractRoutingData
 ////        dbDetail.setTenantId(dataSourceKey);
 ////        dbDetail.setUrl("jdbc:mysql://192.168.139.128:3306/tenant002?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false");
 ////        dbDetail.setUsername("root");
-        System.out.println(dbDetail.toString());
         return dbDetail;
     }
 

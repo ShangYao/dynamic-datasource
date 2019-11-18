@@ -1,4 +1,4 @@
-package com.inspur.dynamicdatasource.config;
+package com.inspur.dynamicdatasource.config.annotation;
 
 import java.lang.annotation.*;
 

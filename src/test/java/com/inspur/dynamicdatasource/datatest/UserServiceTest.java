@@ -1,7 +1,9 @@
 package com.inspur.dynamicdatasource.datatest;
 
+import com.inspur.dynamicdatasource.entity.User;
 import com.inspur.dynamicdatasource.service.UserService;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,5 +18,13 @@ public class UserServiceTest {
     @Test
     public void testSelectAll() {
         userService.selectAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void testInsert() throws Exception {
+        User user = new User();
+        user.setName("jet");
+        user.setTenantId("3");
+        Assertions.assertEquals(1, userService.insert(user));
     }
 }
