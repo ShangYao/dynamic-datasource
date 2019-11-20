@@ -63,7 +63,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private DataSource createDataSource(String dataSourceKey) {
         DatabaseDetail dbDetail = getDatabaseDetail(dataSourceKey);
-        return DynamicDataSourceConfig.createDataSourceByTenantId(dbDetail);
+        return DynamicDataSourceConfig.createDataSource(dbDetail);
     }
 
     // 数据库信息动态获取
